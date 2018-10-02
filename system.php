@@ -1,10 +1,11 @@
 <?php
 /* Here we are goin to write our php code.*/
-$formData['name'] = filter_post('name', FILTER_SANITIZE_STRING);
-$formData['email'] = filter_post('email');
+$formData['name'] = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+$formData['email'] = filter_input(INPUT_POST, 'email');
 $formData['email'] = checkEmail($formData['email']);
-$formData['major'] = filter_post('major', FILTER_SANITIZE_STRING);
-$formData['comments'] = filter_post('comments', FILTER_SANITIZE_STRING);
+$formData['major'] = filter_input(INPUT_POST, 'major', FILTER_SANITIZE_STRING);
+$formData['comments'] = filter_input(INPUT_POST, 'comments', FILTER_SANITIZE_STRING);
+$formData['continent'] =$_POST['continent'];
 
 function checkEmail($email){
   $sanEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
@@ -26,6 +27,8 @@ function checkEmail($email){
     <p>Major: <?= $formData['major'] ?></p>
     <p><strong>Comments:</strong></p>
     <p><?= $formData['comments'] ?></p>
+    <p><strong>Continent</strong></p>
+    <p><?= json_encode($formData['continent']) ?></p>
   </body>
 </html>
 
